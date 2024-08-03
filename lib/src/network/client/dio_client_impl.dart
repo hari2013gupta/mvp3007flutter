@@ -7,13 +7,7 @@ import 'package:mvp3007/src/network/client/dio_client.dart';
 import 'package:mvp3007/src/network/client/dio_excep_custom.dart';
 import 'package:mvp3007/src/network/client/dio_interceptor_logs.dart';
 
-enum DioMethod {
-  post,
-  get,
-  put,
-  delete,
-  download,
-}
+enum DioMethod { post, get, put, delete, download }
 
 class DioClientImpl extends DioClient {
   late Dio _dio;

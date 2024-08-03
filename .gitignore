@@ -34,6 +34,7 @@ migrate_working_dir/
 *.json
 /lib/src/app_test.dart
 /lib/test.dart
+/lib/graphql.dart
 
 # Symbolication related
 app.*.symbols
