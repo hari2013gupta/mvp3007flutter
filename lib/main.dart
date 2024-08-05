@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mvp3007/src/network/client/dio_client.dart';
 import 'package:mvp3007/src/network/client/dio_client_impl.dart';
+import 'package:mvp3007/src/network/client/http/api_client.dart';
+import 'package:mvp3007/src/network/client/http/api_client_impl.dart';
 
 import 'src/app.dart';
 
@@ -31,4 +33,5 @@ initServices() async {
   }
   // dio clinet service
   await Get.putAsync<DioClient>(() => DioClientImpl().init());
+  await Get.putAsync<ApiClient>(() => ApiClientImpl().init());
 }

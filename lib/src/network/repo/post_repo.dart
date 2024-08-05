@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mvp3007/src/app/app_const.dart';
 import 'package:mvp3007/src/model/post_model.dart';
+import 'package:mvp3007/src/network/client/http/api_client.dart';
+import 'package:mvp3007/src/network/client/http/api_client_impl.dart';
 
 import '../client/dio_client.dart';
 import '../client/dio_client_impl.dart';
@@ -14,16 +16,19 @@ abstract class PostRepository {
 
 class PostRepositoryImpl extends PostRepository {
   late DioClient _client;
+  late ApiClient _apiClient;
 
   PostRepositoryImpl() {
     _client = Get.put(DioClientImpl());
+    _apiClient = Get.put(ApiClientImpl());
   }
 
   @override
   Future<List<PostModel>?> getAllPosts() async {
     final dio.Response response;
     try {
-      response = await _client.getRequest(ApiConstants.postApi, {});
+      // response = await _client.getRequest(ApiConstants.postApi, {});
+      response = await _apiClient.getRequest(ApiConstants.postApi, {});
       if (response.statusCode == 200) {
         final responseList =
             (response.data as List).map((x) => PostModel.fromJson(x)).toList();

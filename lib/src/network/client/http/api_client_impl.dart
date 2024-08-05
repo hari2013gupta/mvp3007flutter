@@ -26,13 +26,14 @@ class ApiClientImpl extends ApiClient {
       HttpHeaders.acceptHeader: Headers.jsonContentType,
       HttpHeaders.contentTypeHeader: Headers.jsonContentType,
     };
-
+    http.Response? response;
     try {
-      final response = await http.get(Uri.parse(url), headers: headers);
+      response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode != 200) {
         throw HttpException('${response.statusCode}');
       }
       final jsonMap = jsonDecode(response.body);
+      print(jsonMap);
     } on SocketException {
       print('No Internet connection 😑');
     } on HttpException {
@@ -41,6 +42,7 @@ class ApiClientImpl extends ApiClient {
       print("Bad response format 👎");
     }
     debugPrint('---------------');
+    return response;
   }
 
   @override
