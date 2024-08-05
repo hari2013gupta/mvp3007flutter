@@ -34,4 +34,12 @@ flutter:
 
   assets:
     # Add assets from the images directory to the application.
-    - assets/images/
+    # - assets/images/
+    - assets/env/
+    - assets/dev/
+    - path: assets/dev/images/
+      flavors:
+        - dev
+    - path: assets/images/
+      flavors:
+        - prod

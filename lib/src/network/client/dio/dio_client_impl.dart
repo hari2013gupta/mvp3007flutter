@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mvp3007/src/app/app_const.dart';
-import 'package:mvp3007/src/network/client/dio_client.dart';
-import 'package:mvp3007/src/network/client/dio_excep_custom.dart';
-import 'package:mvp3007/src/network/client/dio_interceptor_logs.dart';
+import 'package:mvp3007/src/network/client/dio/dio_client.dart';
+import 'package:mvp3007/src/network/client/dio/dio_excep_custom.dart';
+import 'package:mvp3007/src/network/client/dio/dio_interceptor_logs.dart';
 
 enum DioMethod { post, get, put, delete, download }
 
@@ -23,7 +23,7 @@ class DioClientImpl extends DioClient {
     // _dio.interceptors.add(DioAuthInterceptor(accessToken: 'token'));
     _dio.options.connectTimeout = connectTimeout;
     _dio.options.receiveTimeout = receiveTimeout;
-    _dio.options.baseUrl = ApiConstants.baseUrl;
+    _dio.options.baseUrl = ApiConstants.baseUrl ?? 'urlNotFound';
     _dio.options.headers = headers;
     _dio.options.contentType = Headers.jsonContentType;
     _dio.options.responseType = ResponseType.json;

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:mvp3007/src/network/client/dio_client_impl.dart';
+import 'package:mvp3007/src/network/client/dio/dio_client_impl.dart';
 
 abstract class DioClient extends GetxService {
 

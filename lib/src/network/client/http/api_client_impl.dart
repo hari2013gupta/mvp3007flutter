@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import 'api_client.dart';
@@ -32,14 +33,17 @@ class ApiClientImpl extends ApiClient {
       if (response.statusCode != 200) {
         throw HttpException('${response.statusCode}');
       }
-      final jsonMap = jsonDecode(response.body);
-      print(jsonMap);
+      // print(response.body);
+      // final jsonMap = jsonDecode(response.body);
+      // print(jsonMap);
     } on SocketException {
-      print('No Internet connection 😑');
+      debugPrint('No Internet connection 😑');
     } on HttpException {
-      print("Couldn't find the post 😱");
+      debugPrint("Couldn't find the post 😱");
     } on FormatException {
-      print("Bad response format 👎");
+      debugPrint("Bad response format 👎");
+    } on Exception {
+      debugPrint("Something went wrong!!!");
     }
     debugPrint('---------------');
     return response;

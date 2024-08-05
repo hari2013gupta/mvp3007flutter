@@ -1,5 +1,6 @@
 // All routes
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 const initialRoute = '/';
@@ -11,7 +12,7 @@ const tagDetailController = 'detail_controller';
 
 // Api constants
 class ApiConstants {
-  static const baseUrl = 'https://jsonplaceholder.typicode.com/';
+  static final baseUrl = dotenv.env['BASE_URL']; // todo: test this value
   static const postApi = 'posts';
 }
 
