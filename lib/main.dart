@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:mvp3007/src/app/app_environment.dart';
+import 'package:mvp3007/src/app/app_env.dart';
 import 'package:mvp3007/src/network/client/dio/dio_client.dart';
 import 'package:mvp3007/src/network/client/dio/dio_client_impl.dart';
 import 'package:mvp3007/src/network/client/http/api_client.dart';
@@ -34,7 +34,6 @@ initServices() async {
   if (kDebugMode) {
     print('Starting services ...');
   }
-  // dio clinet service
   await Get.putAsync<DioClient>(() => DioClientImpl().init());
   await Get.putAsync<ApiClient>(() => ApiClientImpl().init());
 }

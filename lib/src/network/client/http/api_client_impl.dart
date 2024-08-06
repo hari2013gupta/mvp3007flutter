@@ -1,10 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:mvp3007/src/app/app_env.dart';
 
 import 'api_client.dart';
 
@@ -22,20 +21,21 @@ class ApiClientImpl extends ApiClient {
   }
 
   @override
-  Future getRequest(String url, Map<String, dynamic>? params) async {
+  Future getRequest(String path, Map<String, dynamic>? params) async {
     final Map<String, String> headers = {
       HttpHeaders.acceptHeader: Headers.jsonContentType,
       HttpHeaders.contentTypeHeader: Headers.jsonContentType,
     };
     http.Response? response;
     try {
-      response = await http.get(Uri.parse(url), headers: headers);
+      var httpUrl = Uri.https(AppEnvironment.baseUrl, path, params);
+      response = await httpCall.get(httpUrl, headers: headers);
+
+      debugPrint('GET Response status: ${response.statusCode}');
+      // debugPrint(await http.read(Uri.https('example.com', 'foobar.txt')));
       if (response.statusCode != 200) {
         throw HttpException('${response.statusCode}');
       }
-      // print(response.body);
-      // final jsonMap = jsonDecode(response.body);
-      // print(jsonMap);
     } on SocketException {
       debugPrint('No Internet connection 😑');
     } on HttpException {
@@ -56,9 +56,31 @@ class ApiClientImpl extends ApiClient {
   }
 
   @override
-  Future postRequest(String url, Map<String, dynamic>? params) {
-    // TODO: implement postRequest
-    throw UnimplementedError();
+  Future postRequest(String path, Map<String, dynamic>? params) async {
+    final Map<String, String> headers = {
+      HttpHeaders.acceptHeader: Headers.jsonContentType,
+      HttpHeaders.contentTypeHeader: Headers.jsonContentType,
+    };
+    http.Response? response;
+    try {
+      var httpUrl = Uri.https(AppEnvironment.baseUrl, path, params);
+      response = await httpCall.post(httpUrl, headers: headers);
+
+      debugPrint('POST Response status: ${response.statusCode}');
+      if (response.statusCode != 200) {
+        throw HttpException('${response.statusCode}');
+      }
+    } on SocketException {
+      debugPrint('No Internet connection 😑');
+    } on HttpException {
+      debugPrint("Couldn't find the post 😱");
+    } on FormatException {
+      debugPrint("Bad response format 👎");
+    } on Exception {
+      debugPrint("Something went wrong!!!");
+    }
+    debugPrint('---------------');
+    return response;
   }
 
   @override

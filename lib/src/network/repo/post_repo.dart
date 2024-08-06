@@ -25,9 +25,12 @@ class PostRepositoryImpl extends PostRepository {
   Future<List<PostModel>?> getAllPosts() async {
     final http.Response response;
     try {
-      String url = '${dotenv.env['BASE_URL']}${ApiConstants.postApi}';
-      var params = {'index': 1};
-      response = await _client.getRequest(url, params);
+      Map<String, dynamic>? params = {'id': 1};
+      params = params.map((key, value) => MapEntry(key, value.toString()));
+      
+      const path = ApiConstants.postApi;
+      response = await _client.getRequest(path, params);
+
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
         final resultList =
@@ -45,14 +48,17 @@ class PostRepositoryImpl extends PostRepository {
 
   @override
   Future<PostModel?> getOnePost(int index) async {
-    final Response response;
+    final http.Response response;
     try {
-      var params = {'id': index};
-      String url = '${dotenv.env['BASE_URL']}${ApiConstants.postApi}/$index';
-      response = await _client.getRequest(url, params);
+      Map<String, dynamic>? params = {'index': index};
+      params = params.map((key, value) => MapEntry(key, value.toString()));
+
+      final path = '${ApiConstants.postApi}/$index';
+      response = await _client.getRequest(path, params);
 
       if (response.statusCode == 200) {
-        return PostModel.fromJson(response.body);
+        final result = jsonDecode(response.body);
+        return PostModel.fromJson(result);
       }
       return null;
     } on http.ClientException catch (e) {

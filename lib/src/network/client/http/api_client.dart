@@ -5,9 +5,9 @@ abstract class ApiClient extends GetxService {
 
   Future<ApiClient> init();
 
-  Future<dynamic> getRequest(String url, Map<String, dynamic>? params);
+  Future<dynamic> getRequest(String path, Map<String, dynamic>? params);
 
-  Future<dynamic> postRequest(String url, Map<String, dynamic>? params);
+  Future<dynamic> postRequest(String path, Map<String, dynamic>? params);
 
   Future<dynamic> postMultipartRequest(String url, Object? formData);
 
