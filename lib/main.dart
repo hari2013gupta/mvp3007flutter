@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:mvp3007/src/app/app_environment.dart';
 import 'package:mvp3007/src/network/client/dio/dio_client.dart';
 import 'package:mvp3007/src/network/client/dio/dio_client_impl.dart';
 import 'package:mvp3007/src/network/client/http/api_client.dart';
@@ -14,7 +15,7 @@ import 'src/app.dart';
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await dotenv.load(fileName: "env/dev.env");
+    await dotenv.load(fileName: AppEnvironment.fileName);
     initServices();
 
     FlutterError.onError = (FlutterErrorDetails details) {

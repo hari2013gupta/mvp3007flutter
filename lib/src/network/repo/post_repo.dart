@@ -26,7 +26,8 @@ class PostRepositoryImpl extends PostRepository {
     final http.Response response;
     try {
       String url = '${dotenv.env['BASE_URL']}${ApiConstants.postApi}';
-      response = await _client.getRequest(url, );
+      var params = {'index': 1};
+      response = await _client.getRequest(url, params);
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
         final resultList =
@@ -47,9 +48,8 @@ class PostRepositoryImpl extends PostRepository {
     final Response response;
     try {
       var params = {'id': index};
-            String url = '${dotenv.env['BASE_URL']}${ApiConstants.postApi}/$index';
-      response =
-          await _client.getRequest(url, params);
+      String url = '${dotenv.env['BASE_URL']}${ApiConstants.postApi}/$index';
+      response = await _client.getRequest(url, params);
 
       if (response.statusCode == 200) {
         return PostModel.fromJson(response.body);
