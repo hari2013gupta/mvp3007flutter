@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mvp3007/src/app/app_const.dart';
 import 'package:mvp3007/src/binding/bindings.dart';
-import 'package:mvp3007/src/view/views.dart';
-
+import 'package:mvp3007/src/ui/ui.dart';
 
 List<GetPage<dynamic>> get setRoute => [
       GetPage(

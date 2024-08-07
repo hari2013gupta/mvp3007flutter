@@ -10,13 +10,13 @@ import 'api_client.dart';
 enum HttpMethod { post, get, put, delete, download }
 
 class ApiClientImpl extends ApiClient {
-  late http.Client httpCall;
+  late http.Client httpClient;
   static const connectTimeout = Duration(seconds: 50);
   static const receiveTimeout = Duration(seconds: 30);
 
   @override
   Future<ApiClient> init() async {
-    httpCall = http.Client();
+    httpClient = http.Client();
     return this;
   }
 
@@ -29,7 +29,7 @@ class ApiClientImpl extends ApiClient {
     http.Response? response;
     try {
       var httpUrl = Uri.https(AppEnvironment.baseUrl, path, params);
-      response = await httpCall.get(httpUrl, headers: headers);
+      response = await httpClient.get(httpUrl, headers: headers);
 
       debugPrint('GET Response status: ${response.statusCode}');
       // debugPrint(await http.read(Uri.https('example.com', 'foobar.txt')));
@@ -64,7 +64,7 @@ class ApiClientImpl extends ApiClient {
     http.Response? response;
     try {
       var httpUrl = Uri.https(AppEnvironment.baseUrl, path, params);
-      response = await httpCall.post(httpUrl, headers: headers);
+      response = await httpClient.post(httpUrl, headers: headers, body: params);
 
       debugPrint('POST Response status: ${response.statusCode}');
       if (response.statusCode != 200) {

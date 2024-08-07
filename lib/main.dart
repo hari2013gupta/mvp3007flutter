@@ -23,7 +23,7 @@ void main() {
     };
     runApp(const App());
   }, (error, stack) => catchUnhandledExceptions);
-}
+} 
 
 void catchUnhandledExceptions(Object error, StackTrace? stack) {
   // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);

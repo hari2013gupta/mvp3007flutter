@@ -23,7 +23,7 @@ class DioClientImpl extends DioClient {
     // _dio.interceptors.add(DioAuthInterceptor(accessToken: 'token'));
     _dio.options.connectTimeout = connectTimeout;
     _dio.options.receiveTimeout = receiveTimeout;
-    _dio.options.baseUrl = ApiConstants.baseUrl ?? 'urlNotFound';
+    _dio.options.baseUrl = ApiConstants.dioBaseUrl ?? 'urlNotFound';
     _dio.options.headers = headers;
     _dio.options.contentType = Headers.jsonContentType;
     _dio.options.responseType = ResponseType.json;

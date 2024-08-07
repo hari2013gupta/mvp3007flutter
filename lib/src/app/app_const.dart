@@ -1,8 +1,8 @@
-// All routes
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
+// All routes
 const initialRoute = '/';
 const detailRoute = '/detail';
 
@@ -12,7 +12,7 @@ const tagDetailController = 'detail_controller';
 
 // Api constants
 class ApiConstants {
-  static final baseUrl = dotenv.env['DIO_BASE_URL']; // todo: test this value
+  static final dioBaseUrl = dotenv.env['DIO_BASE_URL']; // todo: test this value
   static const postApi = 'posts';
 }
 
