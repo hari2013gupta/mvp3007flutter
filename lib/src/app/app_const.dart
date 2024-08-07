@@ -12,7 +12,7 @@ const tagDetailController = 'detail_controller';
 
 // Api constants
 class ApiConstants {
-  static final baseUrl = dotenv.env['BASE_URL']; // todo: test this value
+  static final baseUrl = dotenv.env['DIO_BASE_URL']; // todo: test this value
   static const postApi = 'posts';
 }
 

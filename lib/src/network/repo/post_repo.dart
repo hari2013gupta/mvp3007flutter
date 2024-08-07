@@ -25,11 +25,8 @@ class PostRepositoryImpl extends PostRepository {
   Future<List<PostModel>?> getAllPosts() async {
     final http.Response response;
     try {
-      Map<String, dynamic>? params = {'id': 1};
-      params = params.map((key, value) => MapEntry(key, value.toString()));
-      
-      const path = ApiConstants.postApi;
-      response = await _client.getRequest(path, params);
+      Map<String, dynamic>? params = {};
+      response = await _client.getRequest(ApiConstants.postApi, params);
 
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
@@ -50,7 +47,7 @@ class PostRepositoryImpl extends PostRepository {
   Future<PostModel?> getOnePost(int index) async {
     final http.Response response;
     try {
-      Map<String, dynamic>? params = {'index': index};
+      Map<String, dynamic>? params = {'id': index};
       params = params.map((key, value) => MapEntry(key, value.toString()));
 
       final path = '${ApiConstants.postApi}/$index';
