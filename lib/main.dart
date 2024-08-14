@@ -34,6 +34,6 @@ initServices() async {
   if (kDebugMode) {
     print('Starting services ...');
   }
-  await Get.putAsync<DioClient>(() => DioClientImpl().init());
+  // await Get.putAsync<DioClient>(() => DioClientImpl().init());
   await Get.putAsync<ApiClient>(() => ApiClientImpl().init());
 }

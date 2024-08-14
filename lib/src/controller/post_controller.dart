@@ -13,7 +13,8 @@ class PostController extends GetxController {
   void onInit() {
     super.onInit();
     _postRepository = Get.find<PostRepositoryImpl>();
-    fetchPosts();
+    // fetchPosts();
+    fetchCreateOrder();
   }
 
   fetchPosts() async {
@@ -24,6 +25,22 @@ class PostController extends GetxController {
       if (value != null) {
         postList.clear();
         postList.addAll(value);
+      } else {
+        appSnackbar('Alert', 'No data found!');
+      }
+    }).onError((error, stackTrace) {
+      isLoading(false);
+      error.printError();
+      appSnackbar('Alert', 'Err: $error');
+    });
+  }
+
+  fetchCreateOrder() async {
+    isLoading(true);
+    await _postRepository.postCreateOrder('orderid', 10).then((value) {
+      isLoading(false);
+      if (value != null) {
+        print(value);
       } else {
         appSnackbar('Alert', 'No data found!');
       }

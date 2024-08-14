@@ -11,6 +11,7 @@ import 'package:mvp3007/src/network/client/dio/dio_client_impl.dart';
 abstract class PostDioRepository {
   Future<List<PostModel>?> getAllPosts();
   Future<PostModel?> getOnePost(int index);
+  Future<String?> postCreateOrder(String orderId, int orderAmount);
 }
 
 class PostRepositoryImpl extends PostDioRepository {
@@ -60,6 +61,29 @@ class PostRepositoryImpl extends PostDioRepository {
 
       if (response.statusCode == 200) {
         return PostModel.fromJson(response.data);
+      }
+      return null;
+    } on dio.DioException catch (e) {
+      debugPrint(e.message);
+      return null;
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+  
+  @override
+  Future<String?> postCreateOrder(String orderId, int orderAmount) async {
+    final Response response;
+    try {
+      Map<String, dynamic>? params = {'order_id': orderId};
+      params = params.map((key, value) => MapEntry(key, value.toString()));
+
+      const path = ApiConstants.createOrderApi;
+      response = await _client.postRequest(path, params);
+
+      if (response.statusCode == 200) {
+        final result = jsonDecode(response.body);
+        return result.toString();
       }
       return null;
     } on dio.DioException catch (e) {

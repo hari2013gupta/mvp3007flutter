@@ -63,6 +63,7 @@ class ApiClientImpl extends ApiClient {
     };
     http.Response? response;
     try {
+      debugPrint('-----------URL BSDR:_____${AppEnvironment.baseUrl}');
       var httpUrl = Uri.https(AppEnvironment.baseUrl, path, params);
       response = await httpClient.post(httpUrl, headers: headers, body: params);
 
