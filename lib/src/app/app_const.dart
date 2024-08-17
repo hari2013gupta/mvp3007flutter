@@ -15,7 +15,8 @@ class ApiConstants {
   static final dioBaseUrl = dotenv.env['DIO_BASE_URL']; // todo: test this value
   static const postApi = 'posts';
 
-  static final uatBaseUrl = dotenv.env['UAT_BASE_URL'];
+  static final uatBaseUrlHttp = dotenv.env['UAT_BASE_URL_HTTP'];
+  static final uatBaseUrlDio = dotenv.env['UAT_BASE_URL_DIO'];
   static const String createOrderApi = 'transaction/v1/order/createorder';
 }
 

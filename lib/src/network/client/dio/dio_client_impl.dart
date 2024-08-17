@@ -23,7 +23,7 @@ class DioClientImpl extends DioClient {
     // _dio.interceptors.add(DioAuthInterceptor(accessToken: 'token'));
     _dio.options.connectTimeout = connectTimeout;
     _dio.options.receiveTimeout = receiveTimeout;
-    _dio.options.baseUrl = ApiConstants.uatBaseUrl ?? 'urlNotFound';
+    _dio.options.baseUrl = ApiConstants.uatBaseUrlDio ?? 'urlNotFound';
     _dio.options.headers = headers;
     _dio.options.contentType = Headers.jsonContentType;
     _dio.options.responseType = ResponseType.json;
@@ -53,7 +53,8 @@ class DioClientImpl extends DioClient {
   Future postRequest(String url, Map<String, dynamic>? params) async {
     Response response;
     try {
-      response = await _dio.post(url, queryParameters: params);
+      response = await _dio.post(url, data: params);
+      print('---------------OK');
     } on DioException catch (e) {
       throw DioExcepCustom.fromDioError(
               dioError: e, errorFrom: 'DIO_POST_METHOD:')

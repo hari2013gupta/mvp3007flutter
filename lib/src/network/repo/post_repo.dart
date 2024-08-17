@@ -75,7 +75,7 @@ class PostRepositoryImpl extends PostRepository {
       Map<String, dynamic>? params = {
         "aggregatorId": "SBIEPAY",
         "merchantId": "1000003",
-        "merchantOrderNo": "M15545645644565w",
+        "merchantOrderNo": "M15545645644565$orderId",
         "merchantCustomerId": "CUST0012",
         "merchantPostedAmount": 1000.50,
         "merchResponseUrl": "https://merchant.com/response2",

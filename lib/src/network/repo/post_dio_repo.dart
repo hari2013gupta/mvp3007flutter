@@ -14,10 +14,10 @@ abstract class PostDioRepository {
   Future<String?> postCreateOrder(String orderId, int orderAmount);
 }
 
-class PostRepositoryImpl extends PostDioRepository {
+class PostDioRepositoryImpl extends PostDioRepository {
   late DioClient _client;
 
-  PostRepositoryImpl() {
+  PostDioRepositoryImpl() {
     _client = Get.put(DioClientImpl());
   }
 
@@ -70,12 +70,31 @@ class PostRepositoryImpl extends PostDioRepository {
       throw Exception(e);
     }
   }
-  
+
   @override
   Future<String?> postCreateOrder(String orderId, int orderAmount) async {
     final Response response;
     try {
-      Map<String, dynamic>? params = {'order_id': orderId};
+      Map<String, dynamic>? params = {
+        "aggregatorId": "SBIEPAY",
+        "merchantId": "1000003",
+        "merchantOrderNo": "M15545645644565$orderId",
+        "merchantCustomerId": "CUST0012",
+        "merchantPostedAmount": 1000.50,
+        "merchResponseUrl": "https://merchant.com/response2",
+        "merchOtherDetails": "Additional details2",
+        "payModeCode": "PM0012",
+        "sourceUrl": "https://merchant.com/source2",
+        "procStatus": "P",
+        "creationDate": "2024-07-20T14:30:00Z",
+        "transactionSource": "ONLINE",
+        "creditInstructions": "Credit to account",
+        "webServer": "server1",
+        "clientIpAddress": "192.168.1.12",
+        "modifiedDate": "2024-07-21T10:15:00Z",
+        "challanExpiryDate": "2024-08-20T00:00:00Z",
+        "creationDtNum": null
+      };
       params = params.map((key, value) => MapEntry(key, value.toString()));
 
       const path = ApiConstants.createOrderApi;

@@ -11,6 +11,7 @@ class PostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = PostController.to;
+    controller.fetchCreateOrderDio(orderId: 'ooId');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Blog Posts',
@@ -18,7 +19,7 @@ class PostView extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
-              onPressed: () => controller.fetchPosts(),
+              onPressed: () => controller.fetchCreateOrderDio(orderId: 'oo'),
               icon: const Icon(Icons.refresh, color: Colors.white))
         ],
       ),
